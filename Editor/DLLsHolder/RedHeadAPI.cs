@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 namespace Editor.DLLsHolder
 {
   
-    static class EngineAPI
+    static class RedHeadAPI
     {
-        private const string _dllName = "Enginedll.dll";
+        private const string _dllName = "EngineDll.dll";
 
         [DllImport(_dllName)]
         private static extern int CreateGameEntity(GameEntityDescriptor desc);

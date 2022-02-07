@@ -39,7 +39,7 @@ namespace Editor
             {
                 messagesTextBlock.Text = "Invalid Character(s) used in Project Path.";
             }
-            else if (!Directory.Exists(Path.Combine(path,@"Engine\EngineAPI")))
+            else if (!Directory.Exists(Path.Combine(path, @"RedHandEngine\EngineAPI")))
             {
                 messagesTextBlock.Text = "Unable to find the Engine files in the specified location !";
             }

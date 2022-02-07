@@ -4,10 +4,10 @@
 
 #include "CommonHeaders.h"
 #include "id.h"
-#include "../Engine/Components/Entity.h"
-#include "../Engine/Components/Transform.h"
+#include "../RedHandEngine/Components/Entity.h"
+#include "../RedHandEngine/Components/Transform.h"
 
-using namespace Engine;
+using namespace RedHandEngine;
 
 namespace {
 	struct transform_component {

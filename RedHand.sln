@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.31903.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Editor", "Editor\Editor.csproj", "{76438215-3400-4E8C-9417-D409F4CB636B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Engine\Engine.vcxproj", "{6FF43682-218A-4064-BEEE-490F8ECC8FE9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RedHandEngine", "RedHandEngine\RedHandEngine.vcxproj", "{6FF43682-218A-4064-BEEE-490F8ECC8FE9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineTest", "EngineTest\EngineTest.vcxproj", "{EF22CA86-BB46-494F-A0F9-CD8D0E5D3A43}"
 EndProject

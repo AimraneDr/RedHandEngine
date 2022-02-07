@@ -1,4 +1,4 @@
-#pragma comment(lib,"Engine.lib")
+#pragma comment(lib,"RedHandEngine.lib")
 
 #define TEST_ENTITY_COMPONENT 1
 

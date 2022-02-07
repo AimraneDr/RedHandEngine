@@ -2,7 +2,7 @@
 
 #include "ComponentsCommon.h"
 
-namespace Engine {
+namespace RedHandEngine {
 #define INIT_INFO(component) namespace component {struct init_info;}
 
 	INIT_INFO( transform );

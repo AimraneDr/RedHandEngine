@@ -3,7 +3,7 @@
 #include "TransformComponent.h"
 #include "ScriptComponent.h"
 
-namespace Engine {
+namespace RedHandEngine {
 	namespace game_entity {
 		DEFINE_TYPED_ID(entity_id);
 
@@ -46,9 +46,9 @@ namespace Engine {
 	class TYPE;															\
 	namespace {															\
 		const u8 reg##TYPE												\
-		{ Engine::script::details::register_script(						\
-				Engine::script::details::string_hash()(#TYPE) ,			\
-				&Engine::script::details::create_script<TYPE>) };		\
+		{ RedHandEngine::script::details::register_script(						\
+				RedHandEngine::script::details::string_hash()(#TYPE) ,			\
+				&RedHandEngine::script::details::create_script<TYPE>) };		\
 		}
 	}//script namespace
 

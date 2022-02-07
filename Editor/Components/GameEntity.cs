@@ -43,12 +43,12 @@ namespace Editor.Components
                     _isActive = value;
                     if (_isActive)
                     {
-                        EntityID = EngineAPI.CreateGameEntity(this);
+                        EntityID = RedHeadAPI.CreateGameEntity(this);
                         Debug.Assert(ID.IsValid(EntityID));
                     }
                     else if(ID.IsValid(EntityID))
                     {
-                        EngineAPI.RemoveGameEntity(this);
+                        RedHeadAPI.RemoveGameEntity(this);
                         EntityID = ID.INVALID_ID;
                     }
                     OnPropertyChanged(nameof(_isActive));

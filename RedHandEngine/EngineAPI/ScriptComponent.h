@@ -5,7 +5,7 @@
 
 
 
-namespace Engine::script {
+namespace RedHandEngine::script {
 
 	DEFINE_TYPED_ID(script_id);
 

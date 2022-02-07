@@ -3,7 +3,7 @@
 #include "Script.h"
 
 
-namespace Engine::game_entity {
+namespace RedHandEngine::game_entity {
 
 	namespace {
 		utls::vector <transform::component>		transforms;

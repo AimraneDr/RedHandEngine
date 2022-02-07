@@ -1,7 +1,7 @@
 #pragma once
 #include "ComponentsCommon.h"
 
-namespace Engine::script {
+namespace RedHandEngine::script {
 
 
 	struct init_info

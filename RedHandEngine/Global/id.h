@@ -1,7 +1,7 @@
 #pragma once
 #include "CommonHeaders.h"
 
-namespace Engine::id {
+namespace RedHandEngine::id {
 using id_type = u32;
 namespace details {
 	constexpr u32		generation_bits{ 10 };//able to change
@@ -50,7 +50,7 @@ namespace details {
 	};
 }
 #define DEFINE_TYPED_ID(name)								\
-		struct name final : id::internal::id_base			\
+		struct name final : id::details::id_base			\
 		{													\
 			constexpr explicit name(id::id_type id)			\
 				:id_base{ id } { }							\

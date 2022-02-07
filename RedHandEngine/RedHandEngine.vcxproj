@@ -34,9 +34,9 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{6ff43682-218a-4064-beee-490f8ecc8fe9}</ProjectGuid>
-    <RootNamespace>Engine</RootNamespace>
+    <RootNamespace>RedHandEngine</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Engine</ProjectName>
+    <ProjectName>RedHandEngine</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">

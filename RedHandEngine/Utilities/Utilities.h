@@ -5,7 +5,7 @@
 
 #if USE_STL_VECTOR
 #include <vector>
-namespace Engine::utls {
+namespace RedHandEngine::utls {
 	template<typename T>
 	using vector = std::vector<T>;
 	template<typename T>
@@ -21,12 +21,12 @@ namespace Engine::utls {
 
 #if USE_STL_DEQUE
 #include <deque>
-namespace Engine::utls {
+namespace RedHandEngine::utls {
 	template<typename T>
 	using deque = std::deque<T>;
 }
 #endif
 
-namespace Engine::utls {
+namespace RedHandEngine::utls {
 	//TODO : Inplement our own containers
 }

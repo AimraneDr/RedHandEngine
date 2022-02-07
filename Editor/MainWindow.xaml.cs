@@ -22,7 +22,7 @@ namespace Editor
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static string EnginePath { get; internal set; } = @"D:\VS_Projects\Engine";
+        public static string EnginePath { get; internal set; } = @"D:\VS_Projects\RedHandEngine";
 
         public MainWindow()
         {
@@ -47,14 +47,14 @@ namespace Editor
 
         private void GetEnginePath()
         {
-            var enginePath = Environment.GetEnvironmentVariable("ENGINE_PATH", EnvironmentVariableTarget.User);
-            if(enginePath == null || !Directory.Exists(Path.Combine(enginePath,@"Engine\EngineAPI")))
+            var enginePath = Environment.GetEnvironmentVariable("REDHAND_ENGINE", EnvironmentVariableTarget.User);
+            if(enginePath == null || !Directory.Exists(Path.Combine(enginePath,@"RedHandEngine\EngineAPI")))
             {
                 var dlg = new EnginePathDialog();
                 if(dlg.ShowDialog() == true)
                 {
                     EnginePath = dlg.EnginePath;
-                    Environment.SetEnvironmentVariable("ENGINE_PATH", EnginePath.ToUpper(),EnvironmentVariableTarget.User);
+                    Environment.SetEnvironmentVariable("REDHAND_ENGINE", EnginePath.ToUpper(),EnvironmentVariableTarget.User);
                 }
                 else
                 {

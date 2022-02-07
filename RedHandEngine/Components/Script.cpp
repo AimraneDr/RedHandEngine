@@ -1,7 +1,7 @@
 #include "Script.h"
 #include "Entity.h"
 
-namespace Engine::script {
+namespace RedHandEngine::script {
 	namespace {
 		utls::vector<details::script_ptr>		entity_scripts;
 		utls::vector<id::id_type>				id_mapping;

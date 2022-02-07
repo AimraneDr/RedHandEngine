@@ -184,7 +184,7 @@ namespace Editor.GameProjectFiles
         {
             Debug.Assert(File.Exists(Path.Combine(template.TemplatePath, "SolutionTemplate")) && File.Exists(Path.Combine(template.TemplatePath, "ProjectTemplate")));
 
-            var engineAPIPath = Path.Combine(MainWindow.EnginePath, @"Engine\EngineAPI\");
+            var engineAPIPath = Path.Combine(MainWindow.EnginePath, @"RedHandEngine\EngineAPI\");
             Debug.Assert(Directory.Exists(engineAPIPath));
 
             var _0 = ProjectName;
