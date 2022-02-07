@@ -1,0 +1,11 @@
+<ProjectTemplate 
+    xmlns="http://schemas.datacontract.org/2004/07/Editor.GameProjectFiles" 
+    xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+    <FolderNames xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+        <a:string>.Sky</a:string>
+        <a:string>Assets</a:string>
+        <a:string>Scripts</a:string>
+    </FolderNames>
+    <ProjectFile>Project.sky</ProjectFile>
+    <ProjectType>3D Empty</ProjectType>
+</ProjectTemplate>

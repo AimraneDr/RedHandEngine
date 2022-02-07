@@ -1,0 +1,404 @@
+﻿<ResourceDictionary x:Class="Editor.Dictionaries.ControlTemplates"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Editor.Dictionaries"
+                    xmlns:utls="clr-namespace:Editor.Utilities.Controls">
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="LightTextBlockStyle">
+        <Setter Property="Foreground" Value="{DynamicResource Editor.FontColorBrush}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AppMainFont}"/>
+    </Style>
+    <Style TargetType="{x:Type TextBox}" x:Key="TextBoxStyle">
+        <Setter Property="Foreground" Value="{DynamicResource Editor.FontColorBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource Editor.Window.PurpleBrush3}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource Editor.Window.PurpleBrush5}"/>
+        <Setter Property="SelectionBrush" Value="White"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="Padding" Value="0 2"/>
+    </Style>
+    <Style TargetType="{x:Type TextBox}" x:Key="{x:Type TextBox}" BasedOn="{StaticResource TextBoxStyle}">
+        <EventSetter Event="KeyDown" Handler="OnTextBox_KeyDown"/>
+    </Style>
+
+    <Style TargetType="{x:Type TextBox}" x:Key="TextBoxStyle_WithRename" BasedOn="{StaticResource TextBoxStyle}">
+        <EventSetter Event="KeyDown" Handler="OnTextBoxRename_KeyDown"/>
+        <EventSetter Event="LostFocus" Handler="OnTextBoxRename_LostFocus"/>
+        <EventSetter Event="PreviewTextInput" Handler="PreviewTextInput"/>
+
+    </Style>
+    
+    <Style x:Key="SimpleStyle" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{DynamicResource Editor.Window.PurpleBrush3}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource Editor.Window.PurpleBrush5}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Editor.FontColorBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource Editor.Window.PurpleBrush5}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!---WINDOW STYLING-->
+    <Style x:Key="EditorWindowStyle" TargetType="{x:Type Window}">
+        <Setter Property="BorderBrush" Value="{DynamicResource Editor.SelectionBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource Editor.Window.PurpleBrush1}"/>
+
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome CornerRadius="0"
+                              ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}"
+                              GlassFrameThickness="0"
+                              CaptionHeight="26"
+                              NonClientFrameEdges="None"
+                              UseAeroCaptionButtons="False"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}},Path=WindowState}"
+                                                 Value="Maximized">
+                                        <Setter Property="BorderThickness" Value="{Binding Source={x:Static SystemParameters.WindowResizeBorderThickness}}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+
+                        <Grid>
+                            <AdornerDecorator>
+                                <ContentPresenter Margin="5 24 5 5"/>
+                            </AdornerDecorator>
+
+                            <DockPanel VerticalAlignment="Top" LastChildFill="False">
+                                <DockPanel.Resources>
+                                    <Style TargetType="Path">
+                                        <Setter Property="Stroke" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
+                                        <Setter Property="StrokeThickness" Value="1"/>
+                                    </Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource SimpleStyle}">
+                                        <Setter Property="Width" Value="24"/>
+                                        <Setter Property="Height" Value="14"/>
+                                        <Setter Property="Margin" Value="0 2 1 0"/>
+                                        <Setter Property="VerticalAlignment" Value="Top"/>
+                                        <Setter Property="SnapsToDevicePixels" Value="True"/>
+                                        <Setter Property="DockPanel.Dock" Value="Right"/>
+                                        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+                                    </Style>
+                                </DockPanel.Resources>
+                                <TextBlock Margin="5 2 0 0" VerticalAlignment="Center"
+                                           DockPanel.Dock="Left" FontWeight="Black"
+                                           Foreground="{DynamicResource Editor.BlueBrush}"
+                                           Text="{TemplateBinding Title}"/>
+
+                                <Button x:Name="CloseBtn" Click="CloseBtn_Click">
+                                    <Button.Content>
+                                        <Grid>
+                                            <Path Data="M1,1.5L 8,8.5" Margin="0"/>
+                                            <Path Data="M1,8.5L 8,1.5" Margin="0"/>
+                                        </Grid>
+                                    </Button.Content>
+                                </Button>
+                                <Button x:Name="MaximiseRestoreBtn" Click="OnMaximizeRestoreBtn_Click">
+                                    <Button.Content>
+                                        <Rectangle Stroke="{DynamicResource Editor.FontColorBrush}" StrokeThickness="1"
+                                                   Width="10" Height="8"/>
+                                    </Button.Content>
+                                </Button>
+                                <Button x:Name="MinimizeBtn" Click="OnMinimizeBtn_Click">
+                                    <Button.Content>
+                                        <Rectangle Stroke="{DynamicResource Editor.FontColorBrush}" StrokeThickness="1"
+                                                   Width="10" Height="1" Margin="0 4 0 0"/>
+                                    </Button.Content>
+                                </Button>
+
+                            </DockPanel>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--DIALOGS STYLING-->
+    <Style x:Key="EditorDialogStyle" TargetType="{x:Type Window}">
+        <Setter Property="BorderBrush" Value="{DynamicResource Editor.SelectionBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource Editor.Window.PurpleBrush1}"/>
+
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome CornerRadius="0"
+                              ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}"
+                              GlassFrameThickness="0"
+                              CaptionHeight="26"
+                              NonClientFrameEdges="None"
+                              UseAeroCaptionButtons="False"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}},Path=WindowState}"
+                                                 Value="Maximized">
+                                        <Setter Property="BorderThickness" Value="{Binding Source={x:Static SystemParameters.WindowResizeBorderThickness}}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+
+                        <Grid>
+                            <AdornerDecorator>
+                                <ContentPresenter Margin="5 24 5 5"/>
+                            </AdornerDecorator>
+
+                            <DockPanel VerticalAlignment="Top" LastChildFill="False">
+                                <DockPanel.Resources>
+                                    <Style TargetType="Path">
+                                        <Setter Property="Stroke" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
+                                        <Setter Property="StrokeThickness" Value="1"/>
+                                    </Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource SimpleStyle}">
+                                        <Setter Property="Width" Value="24"/>
+                                        <Setter Property="Height" Value="14"/>
+                                        <Setter Property="Margin" Value="0 2 1 0"/>
+                                        <Setter Property="VerticalAlignment" Value="Top"/>
+                                        <Setter Property="SnapsToDevicePixels" Value="True"/>
+                                        <Setter Property="DockPanel.Dock" Value="Right"/>
+                                        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+                                    </Style>
+                                </DockPanel.Resources>
+                                <TextBlock Margin="5 2 0 0" VerticalAlignment="Center"
+                                           DockPanel.Dock="Left" FontWeight="Black"
+                                           Foreground="{DynamicResource Editor.BlueBrush}"
+                                           Text="{TemplateBinding Title}"/>
+
+                                <Button x:Name="CloseBtn" Click="CloseBtn_Click">
+                                    <Button.Content>
+                                        <Grid>
+                                            <Path Data="M1,1.5L 8,8.5" Margin="0"/>
+                                            <Path Data="M1,8.5L 8,1.5" Margin="0"/>
+                                        </Grid>
+                                    </Button.Content>
+                                </Button>
+                            </DockPanel>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--NUMIRIC BOX STYLING-->
+    <Style TargetType="{x:Type utls:NumiricBox}" x:Key="{x:Type utls:NumiricBox}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type utls:NumiricBox}">
+                    <Grid>
+                        <TextBlock Name="PART_TextBlock"
+                                   Text="{Binding Value ,RelativeSource={RelativeSource TemplatedParent}}"
+                                   HorizontalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Cursor" Value="SizeWE"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBox Name="PART_TextBox" BorderThickness="0" Padding="0"
+                                 Text="{Binding Value ,RelativeSource={RelativeSource TemplatedParent}, UpdateSourceTrigger=Explicit}"
+                                 Foreground="{TemplateBinding Foreground}" Visibility="Collapsed"
+                                 Style="{StaticResource TextBoxStyle_WithRename}" HorizontalContentAlignment="Center"
+                                 HorizontalAlignment="Center"
+                                 DataObject.Pasting="TextBoxPasting"/>
+
+
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Visibility, ElementName = PART_TextBox}" Value="Visible">
+                            <Setter Property="Visibility" TargetName="PART_TextBlock" Value="Collapsed"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Value ,RelativeSource={RelativeSource Self}}" Value="{x:Null}">
+                            <Setter Property="Background" TargetName="PART_TextBlock" Value="{DynamicResource Editor.Disabled.FontColorBrush}"/>
+                            <Setter Property="ToolTip" TargetName="PART_TextBlock" Value="Mixed Value"/>
+                            <Setter Property="MinWidth" TargetName="PART_TextBlock" Value="20"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--SCALAR BOX STYLING-->
+    <Style TargetType="{x:Type utls:ScalarBox}" x:Key="{x:Type utls:ScalarBox}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Editor.FontColorBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource Editor.Window.GrayBrush1}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource Editor.Window.PurpleBrush6}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="ToolTipService.InitialShowDelay" Value="3000"/>
+        <Setter Property="ToolTipService.BetweenShowDelay" Value="1000"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type utls:ScalarBox}">
+                    <Border Name="border" SnapsToDevicePixels="True" Margin="0 2 0 3"
+                            Background="{TemplateBinding Background}" Padding="5 2"
+                            BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="10"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid MinWidth="50" x:Name="grid">
+                            <TextBlock Name="PART_TextBlock"
+                                   Text="{Binding Value ,RelativeSource={RelativeSource TemplatedParent}}"
+                                   HorizontalAlignment="Center">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Cursor" Value="SizeWE"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="PART_TextBox" BorderThickness="0" Padding="0"
+                                 Text="{Binding Value ,RelativeSource={RelativeSource TemplatedParent}, UpdateSourceTrigger=Explicit}"
+                                 Foreground="{TemplateBinding Foreground}" Visibility="Collapsed"
+                                 Style="{StaticResource TextBoxStyle_WithRename}" HorizontalContentAlignment="Center"
+                                 HorizontalAlignment="Center"
+                                 DataObject.Pasting="TextBoxPasting"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource Editor.SelectionBrush.Saturated}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="grid" Value="0.5"/>
+                        </Trigger>
+                        <DataTrigger Binding="{Binding Visibility, ElementName = PART_TextBox}" Value="Visible">
+                            <Setter Property="Visibility" TargetName="PART_TextBlock" Value="Collapsed"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Value ,RelativeSource={RelativeSource Self}}" Value="{x:Null}">
+                            <Setter Property="Background" TargetName="PART_TextBlock" Value="{DynamicResource Editor.Disabled.FontColorBrush}"/>
+                            <Setter Property="ToolTip" TargetName="PART_TextBlock" Value="Mixed Value"/>
+                            <Setter Property="MinWidth" TargetName="PART_TextBlock" Value="20"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--VECTOR BOX STYLING-->
+    <Style TargetType="{x:Type utls:VectorBox}" x:Key="{x:Type utls:VectorBox}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Background" Value="{DynamicResource Editor.Window.GrayBrush1}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource Editor.Window.PurpleBrush6}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type utls:VectorBox}">
+                    <ControlTemplate.Resources>
+                        <Style TargetType="{x:Type utls:NumiricBox}" BasedOn="{StaticResource {x:Type utls:NumiricBox}}">
+                            <Setter Property="MinWidth" Value="50"/>
+                            <Setter Property="ToolTipService.InitialShowDelay" Value="3000"/>
+                            <Setter Property="ToolTipService.BetweenShowDelay" Value="1000"/>
+                            <Setter Property="Multiplier" Value="{Binding Multiplier,RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Style>
+                    </ControlTemplate.Resources>
+                    <Border Name="border" SnapsToDevicePixels="True" Margin="0 2 0 3"
+                            Background="{TemplateBinding Background}" Padding="5 2"
+                            BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="10"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid x:Name="grid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Name="Column1"/>
+                                <ColumnDefinition x:Name="Column2"/>
+                                <ColumnDefinition x:Name="Column3"/>
+                                <ColumnDefinition x:Name="Column4"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition x:Name="Row1"/>
+                                <RowDefinition x:Name="Row2"/>
+                                <RowDefinition x:Name="Row3"/>
+                                <RowDefinition x:Name="Row4"/>
+                            </Grid.RowDefinitions>
+                            <utls:NumiricBox x:Name="nbX" Foreground="{DynamicResource Editor.RedBrush}" Value="{Binding X,RelativeSource={RelativeSource TemplatedParent}}" ToolTip="X value"/>
+                            <utls:NumiricBox x:Name="nbY" Foreground="{DynamicResource Editor.GreenBrush}" Value="{Binding Y,RelativeSource={RelativeSource TemplatedParent}}" ToolTip="Y value"/>
+                            <utls:NumiricBox x:Name="nbZ" Foreground="{DynamicResource Editor.BlueBrush}" Value="{Binding Z,RelativeSource={RelativeSource TemplatedParent}}" ToolTip="Z value"/>
+                            <utls:NumiricBox x:Name="nbW" Foreground="{DynamicResource Editor.OrangeBrush}" Value="{Binding W,RelativeSource={RelativeSource TemplatedParent}}" ToolTip="W value" Visibility="Collapsed"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Orientation, RelativeSource={RelativeSource Self}}" Value="Horizontal">
+                            <Setter Property="Grid.Column" TargetName="nbX" Value="0"/>
+                            <Setter Property="Grid.Column" TargetName="nbY" Value="1"/>
+                            <Setter Property="Grid.Column" TargetName="nbZ" Value="2"/>
+                            <Setter Property="Grid.Column" TargetName="nbW" Value="3"/>
+                            <Setter Property="Height" TargetName="Row2" Value="auto"/>
+                            <Setter Property="Height" TargetName="Row3" Value="auto"/>
+                            <Setter Property="Height" TargetName="Row4" Value="auto"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Orientation, RelativeSource={RelativeSource Self}}" Value="Vertical">
+                            <Setter Property="Grid.Row" TargetName="nbX" Value="0"/>
+                            <Setter Property="Grid.Row" TargetName="nbY" Value="1"/>
+                            <Setter Property="Grid.Row" TargetName="nbZ" Value="2"/>
+                            <Setter Property="Grid.Row" TargetName="nbW" Value="3"/>
+                            <Setter Property="Width" TargetName="Column2" Value="auto"/>
+                            <Setter Property="Width" TargetName="Column3" Value="auto"/>
+                            <Setter Property="Width" TargetName="Column4" Value="auto"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding VectorType, RelativeSource={RelativeSource Self}}" Value="Vector2">
+                            <Setter Property="Visibility" TargetName="nbZ" Value="Collapsed"/>
+                            <Setter Property="Width" TargetName="Column3" Value="auto"/>
+                            <Setter Property="Width" TargetName="Column4" Value="auto"/>
+                            <Setter Property="Height" TargetName="Row3" Value="auto"/>
+                            <Setter Property="Height" TargetName="Row4" Value="auto"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding VectorType, RelativeSource={RelativeSource Self}}" Value="Vector3">
+                            <Setter Property="Visibility" TargetName="nbW" Value="Collapsed"/>
+                            <Setter Property="Width" TargetName="Column4" Value="auto"/>
+                            <Setter Property="Height" TargetName="Row4" Value="auto"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding VectorType, RelativeSource={RelativeSource Self}}" Value="Vector4">
+                            <Setter Property="Visibility" TargetName="nbW" Value="Visible"/>
+                        </DataTrigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource Editor.SelectionBrush.Saturated}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="grid" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "SkyEngine_TheEditor": {
+      "commandName": "Project",
+      "hotReloadEnabled": true,
+      "nativeDebugging": false
+    }
+  }
+}
