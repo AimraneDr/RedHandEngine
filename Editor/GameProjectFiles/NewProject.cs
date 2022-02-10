@@ -32,7 +32,7 @@ namespace Editor.GameProjectFiles
             }
         }
 
-        private string _path = $@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\EngineProjects";
+        private string _path = $@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\RHEngineProjects";
         public string ProjectPath
         {
             get => _path;
@@ -90,12 +90,12 @@ namespace Editor.GameProjectFiles
                 foreach (var file in templates)
                 {
                     var template = Serializer.FromFile<ProjectTemplate>(file);
-                    template.IconFilePath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(file), "icon.png"));
-                    template.Icon = File.ReadAllBytes(template.IconFilePath);
-                    template.ScreenShotFilePath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(file), "scrennshot.png"));
-                    template.ScrennShot = File.ReadAllBytes(template.ScreenShotFilePath);
-                    template.ProjectFilePath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(file), template.ProjectFile));
                     template.TemplatePath = Path.GetDirectoryName(file);
+                    template.IconFilePath = Path.GetFullPath(Path.Combine(template.TemplatePath, "icon.png"));
+                    template.Icon = File.ReadAllBytes(template.IconFilePath);
+                    template.ScreenShotFilePath = Path.GetFullPath(Path.Combine(template.TemplatePath, "scrennshot.png"));
+                    template.ScrennShot = File.ReadAllBytes(template.ScreenShotFilePath);
+                    template.ProjectFilePath = Path.GetFullPath(Path.Combine(template.TemplatePath, template.ProjectFile));
                     _templates.Add(template);
                 }
                 ValidateProjectPath();
@@ -164,7 +164,7 @@ namespace Editor.GameProjectFiles
                 File.Copy(template.ScreenShotFilePath, Path.GetFullPath(Path.Combine(dirInfo.FullName, "scrennshot.png")));
 
                 var project_file = File.ReadAllText(template.ProjectFilePath);
-                project_file = string.Format(project_file, ProjectName, ProjectPath);
+                project_file = string.Format(project_file, ProjectName, path);
                 var project_path = Path.GetFullPath(Path.Combine(path, $"{ProjectName}{Project.Extension}"));
                 File.WriteAllText(project_path, project_file);
 
@@ -189,17 +189,19 @@ namespace Editor.GameProjectFiles
 
             var _0 = ProjectName;
             var _1 = "{" + Guid.NewGuid().ToString().ToUpper() + "}";
+            var __3 = Project.ProjectGameScriptsFolderName;
+            __3 = __3.Replace('\\',' ').Trim();
             var _2 = engineAPIPath;
             var _3 = MainWindow.EnginePath;
 
             var solution = File.ReadAllText(Path.Combine(template.TemplatePath, "SolutionTemplate"));
-            solution = string.Format(solution, _0, _1, "{" + Guid.NewGuid().ToString().ToUpper() + "}");
+            solution = string.Format(solution, _0, _1, "{" + Guid.NewGuid().ToString().ToUpper() + "}", __3);
 
             var project = File.ReadAllText(Path.Combine(template.TemplatePath, "ProjectTemplate"));
             project = string.Format(project, _0, _1, _2, _3);
 
             File.WriteAllText(Path.GetFullPath(Path.Combine(project_path, $"{_0}.sln")),solution);
-            File.WriteAllText(Path.GetFullPath(Path.Combine(project_path, @$"Scripts\{_0}.vsproj")), project);
+            File.WriteAllText(Path.GetFullPath(Path.Combine(project_path, $"{Project.ProjectGameScriptsFolderName}{_0}.vcxproj")), project);
         }
     }
 

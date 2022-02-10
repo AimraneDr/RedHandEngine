@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Editor.GameDev;
 
 namespace Editor.GameProjectFiles
 {
@@ -20,17 +21,19 @@ namespace Editor.GameProjectFiles
     {
         #region Properties
         public static readonly string ProjectPrivateFolderName = @".Sky\";
+        public static readonly string ProjectGameScriptsFolderName = @"GameScripts\";
         public static string Extension = ".sky";
         [DataMember]
         public string Name { get; private set; }
         [DataMember]
         public string Path { get; private set; }
-        public string FullPath => $@"{Path}{Name}\{Name}{Extension}";
+        public string Solution => $"{Path}{Name}.sln";
+        public string FullPath => $@"{Path}{Name}{Extension}";
         [DataMember(Name = "Scenes")]
         private ObservableCollection<Scene> scenes = new ObservableCollection<Scene>();
         public static ReadOnlyObservableCollection<Scene> ScenesCollection { get; private set; }
 
-        public static Project Current = Application.Current.MainWindow.DataContext as Project;
+        public static Project Current { get; set; } = Application.Current.MainWindow.DataContext as Project;
 
         private Scene active_scene;
         public Scene ActiveScene
@@ -121,6 +124,7 @@ namespace Editor.GameProjectFiles
         }
         public void Unload()
         {
+            VisualStudio.CloseVisualStudio();
             UndoRedo.Reset();
         }
         /*

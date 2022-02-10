@@ -20,11 +20,11 @@
   </ItemGroup>
   <PropertyGroup Label="UserMacros" >
     <Engine_IncludePath>{2}</Engine_IncludePath>
-    <Engine_LibraryPath>{3}%(Platform)\$(Configuration)\</Engine_LibraryPath>
+    <Engine_LibraryPath>{3}$(Platform)\$(Configuration)\</Engine_LibraryPath>
   </PropertyGroup>
   <ItemGroup>
     <BuildMacro Include="Engine_IncludePath">
-      <Value>%(Engine_IncludePath)</Value>
+      <Value>$(Engine_IncludePath)</Value>
     </BuildMacro>
       <BuildMacro Include="Engine_LibraryPath">
       <Value>$(Engine_LibraryPath)</Value>
@@ -109,7 +109,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(Engine_LibraryPath)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Engine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>RedHandEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugEditor|x64'">
@@ -127,7 +127,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(Engine_LibraryPath)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Engine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>RedHandEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -149,7 +149,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(Engine_LibraryPath)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Engine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>RedHandEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseEditor|x64'">
@@ -170,7 +170,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(Engine_LibraryPath)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Engine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>RedHandEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

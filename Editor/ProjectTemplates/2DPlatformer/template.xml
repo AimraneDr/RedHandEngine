@@ -4,7 +4,7 @@
     <FolderNames xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
         <a:string>.Sky</a:string>
         <a:string>Assets</a:string>
-        <a:string>Scripts</a:string>
+        <a:string>GameScripts</a:string>
     </FolderNames>
     <ProjectFile>Project.sky</ProjectFile>
     <ProjectType>2d Platformer</ProjectType>

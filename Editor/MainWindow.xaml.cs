@@ -42,6 +42,7 @@ namespace Editor
             {
                 Project.Current?.Unload();
                 DataContext = browserDialog.DataContext;
+                Project.Current = browserDialog.DataContext as Project;
             }
         }
 

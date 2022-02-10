@@ -24,7 +24,7 @@ namespace RedHandEngine {
 		class entity_script : public game_entity::entity {
 		public:
 			virtual ~entity_script() = default;
-			virtual void Start() {};
+			virtual void Begin() {};
 			virtual void Update(float) {};
 		protected:
 			constexpr explicit entity_script(game_entity::entity entity)

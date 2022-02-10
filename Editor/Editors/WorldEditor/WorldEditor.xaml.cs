@@ -1,4 +1,5 @@
-﻿using Editor.GameProjectFiles;
+﻿using Editor.GameDev;
+using Editor.GameProjectFiles;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -33,6 +34,11 @@ namespace Editor.Editors
             Loaded -= OnLoaded;
             this.Focus();
             //((INotifyCollectionChanged)Project.UndoRedo.UndoActionsList).CollectionChanged += (s, e) => Focus();
+        }
+
+        private void OnNewScriptBtn_Click(object sender, RoutedEventArgs e)
+        {
+           new NewScriptDialog().ShowDialog();
         }
     }
 }
